@@ -1,0 +1,21 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  resourceGroupName: 'my-rg'
+  location: 'eastus'
+
+steps:
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'YOUR-SERVICE-CONNECTION-NAME'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      az group create --name ${{ variables.resourceGroupName }} --location ${{ variables.location }}
+      az deployment group create \
+        --resource-group ${{ variables.resourceGroupName }} \
+        --template-file storage.bicep
