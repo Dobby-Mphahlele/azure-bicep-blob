@@ -1,6 +1,6 @@
 param storageAccountName string = 'mystorage${uniqueString(resourceGroup().id)}'
 param location string = resourceGroup().location
-param containerName string = 'dobbymycontainer'
+param containerName string = 'testcontainer'
 
 resource storageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
   name: storageAccountName
